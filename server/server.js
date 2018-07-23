@@ -32,6 +32,12 @@ app.get('/todos', (req, res) => {
   })
 })
 
+// GET /todos/1323423...
+
+app.get('/todos/:id' , (req, res) => {
+  res.send(req.params)
+})
+
 app.listen(3000, () => {
     console.log('Started on port 3000');
 })
