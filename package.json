@@ -1,7 +1,10 @@
 {
   "name": "todo-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Todo API that manages a todo list for users",
+  "repository": {
+    "url": "https://github.com/LuisOsta/TodoAPI.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
@@ -15,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.14.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "mongodb": "^3.0.2",
     "mongoose": "^4.5.9",
