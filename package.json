@@ -18,12 +18,13 @@
     "express": "^4.14.0",
     "lodash": "^4.17.10",
     "mongodb": "^3.0.2",
-    "mongoose": "^4.5.9"
+    "mongoose": "^4.5.9",
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "expect": "^1.20.2",
-    "mocha": "^3.0.2",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
-    "supertest": "^2.0.0"
+    "supertest": "^3.1.0"
   }
 }

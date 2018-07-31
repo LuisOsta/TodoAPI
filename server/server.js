@@ -103,6 +103,23 @@ app.patch('/todos/:id', (req, res) => {
     res.status(400).send()
   })
 })
+
+// USERS
+
+//POST /users
+app.post('/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password'])
+
+  var user  = new User(body);
+
+  // attempts to save user
+  user.save().then((docs)=>{
+      res.send(docs);
+
+  }, (e) => {
+      res.status(400).send(e);
+  })
+})
 app.listen(port, () => {
     console.log(`Started on port ${port}`);
 })
