@@ -5,7 +5,6 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-const salt = 'abc123'
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -45,7 +44,7 @@ UserSchema.methods.toJSON = function () {
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth'
-  var token = jwt.sign({_id: user._id.toHexString(), access}, salt).toString()
+  var token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString()
   
   user.tokens = user.tokens.concat([{access, token}])
 
@@ -54,12 +53,24 @@ UserSchema.methods.generateAuthToken = function () {
   })
 }
 
+UserSchema.methods.removeToken = function (token) {
+  var user = this;
+
+  return user.update({
+    $pull: {
+      tokens: {
+        token: token
+      }
+    }
+  })
+}
+
 UserSchema.statics.findByToken = function (token) {
   var User = this;
   var decoded;
 
   try {
-    decoded = jwt.verify(token, salt)
+    decoded = jwt.verify(token, 'abc123')
   } catch (e) {
     return Promise.reject()
   }
@@ -78,7 +89,6 @@ UserSchema.statics.findByCredentials = function (email, password) {
     if(!user) {
       return Promise.reject()
     }
-
     return new Promise((resolve, reject) => {
       // user input password, previous hashed password
       bcrypt.compare(password, user.password, (err, res) => {
