@@ -131,7 +131,7 @@ app.get('/users/me', authenticate, (req, res) => {
 })
 
 // POST /users/login {email, password}
-app.post('/users/me', (req, res) => {
+app.post('/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password'])
 
   User.findByCredentials(body.email, body.password).then((user) => {
@@ -144,10 +144,11 @@ app.post('/users/me', (req, res) => {
 })
 
 
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log(`Started on port ${port}`);
 })
 
 module.exports = {
-  app
+  app,
+  server
 }
